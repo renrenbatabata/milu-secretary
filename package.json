@@ -1,0 +1,18 @@
+{
+  "name": "milu-secretary", "version": "0.1.0", "private": true,
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.electron.json && tsc -p tsconfig.json && vite build --configLoader native",
+    "start": "npm run build && electron .",
+    "test": "tsc -p tsconfig.electron.json && node --test tests/*.test.cjs",
+    "package": "npm run build && electron-builder --win nsis --x64"
+  },
+  "dependencies": {"react": "^19.2.0", "react-dom": "^19.2.0"},
+  "devDependencies": {"@types/node": "^24.0.0", "@types/react": "^19.2.0", "@types/react-dom": "^19.2.0", "typescript": "^5.9.0", "vite": "^7.1.0", "electron": "^38.0.0", "electron-builder": "^26.0.0"},
+  "build": {
+    "appId": "local.milu.secretary", "productName": "Milu",
+    "files": ["dist/**/*", "dist-electron/**/*", "package.json"],
+    "directories": {"output": "release"},
+    "win": {"target": "nsis"}, "nsis": {"oneClick": false, "allowToChangeInstallationDirectory": true}
+  }
+}
